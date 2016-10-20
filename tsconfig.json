@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "removeComments": true,
+    "jsx": "react"
+  },
+  "files": [
+    "typings/index.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    /* ... */
+  }
+}

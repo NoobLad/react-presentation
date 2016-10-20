@@ -1,0 +1,36 @@
+<h2>Composer des composants</h2>
+<pre><code class="language-jsx">
+    function CounterButton({onIncrease}) {
+        return (
+            &lt;button type="button" onClick={onIncrease}&gt;+&lt;/button&gt;
+        );
+    }
+
+    function CounterDisplay({counter}) {
+        return (
+            &lt;p&gt;{counter}&lt;/p&gt;
+        );
+    }
+
+    class Counter extends React.Component {
+        constructor(props, context) {
+            super(props, context);
+            this.state = {
+                counter: 0
+            };
+        }
+        increase() {
+            this.setState({
+                counter: this.state.counter + 1
+            });
+        }
+        render() {
+            return (
+                &lt;div&gt;
+                    &lt;CounterDisplay counter={this.state.counter} /&gt;
+                    &lt;CounterButton onIncrease={() => this.increase()} /&gt;
+                &lt;/div&gt;
+            );
+        }
+    }
+</code></pre>

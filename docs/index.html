@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webpack</title>
+</head>
+<body>
+    
+    <section class="reveal">
+        <section class="slides">
+            <section><section><h1>React.JS</h1>
+<h2>TOURS.JS #1</h2></section><section><h2>React.js</h2>
+<p>Bibliothèque pour faire des composants web</p></section><section><h2>Composants ?</h2>
+
+<p>Morceaux d'interface utilisateur réutilisable dont on se fiche de la mécanique interne.</p></section><section><h2>Les promesses de React.js</h2>
+<ul>
+    <li>Il gère la mise à jour du DOM</li>
+    <li>Ne fait rien d'autre que le rendu</li>
+    <li>Performance sans s'en soucier</li>
+    <li>Réutilisabilité</li>
+    <li>Tourne partout</li>
+    <li>Facile à tester</li>
+</ul></section></section><section><section><h2>Un composant ça ressemble à ça</h2>
+<i>SimpleComponent.jsx</i>
+<pre><code class="language-jsx">
+    function SimpleComponent() {
+        return (
+            &lt;div&gt;
+                &lt;h1&gt;Hello&lt;/h1&gt;
+                &lt;hr/&gt;
+            &lt;/div&gt;
+        );
+    }
+</code></pre></section><section><h2>Le même en JS</h2>
+<pre><code class="language-jsx">
+    function SimpleComponent() {
+        return React.createElement(
+            "div",
+            null,
+            React.createElement(
+                "h1",
+                null,
+                "Hello"
+            ),
+            React.createElement("hr", null)
+        );
+    }
+</code></pre></section></section><section><section><h2>Notre composant</h2>
+<div class="button-component"></div></section><section><h2>Afficher une variable</h2>
+<pre><code class="language-jsx">
+    function HelloWorld() {
+        var world = "WOORRRLLLLDDDDD";
+        return (
+            &lt;h1&gt;Hello {world} !&lt;/h1&gt;
+        );
+    }
+</code></pre></section><section><h2>Afficher dans le document</h2>
+<pre><code class="language-jsx">
+    React.render(&lt;HelloWorld /&gt;, document.querySelector('.hello-container'));
+</code></pre></section><section><h2>Avec une classe</h2>
+<pre><code class="language-jsx">
+    class HelloWorld extends React.Component {
+        render() {
+            var world = "WOORRRLLLLDDDDD";
+            return (
+                &lt;h1&gt;Hello {world} !&lt;/h1&gt;
+            );
+        }
+    }
+</code></pre></section><section><h2>State</h2>
+<pre><code class="language-jsx">
+    class Counter extends React.Component {
+        constructor(props, context) {
+            super(props, context);
+            this.state = {
+                counter: 0
+            };
+        }
+        render() {
+            return (
+                &lt;div&gt;
+                    &lt;p&gt;{this.state.counter}&lt;/p&gt;
+                &lt;/div&gt;
+            );
+        }
+    }
+</code></pre></section><section><h2>Listeners</h2>
+<pre><code class="language-jsx">
+    class Counter extends React.Component {
+        constructor(props, context) {
+            super(props, context);
+            this.state = {
+                counter: 0
+            };
+        }
+        increase() {
+            this.setState({
+                counter: this.state.counter + 1
+            });
+        }
+        render() {
+            return (
+                &lt;div&gt;
+                    &lt;p&gt;{this.state.counter}&lt;/p&gt;
+                    &lt;button type="button" onClick={() => this.increase()}&gt;+&lt;/button&gt;
+                &lt;/div&gt;
+            );
+        }
+    }
+</code></pre></section><section><h2>Composer des composants</h2>
+<pre><code class="language-jsx">
+    function CounterButton({onIncrease}) {
+        return (
+            &lt;button type="button" onClick={onIncrease}&gt;+&lt;/button&gt;
+        );
+    }
+
+    function CounterDisplay({counter}) {
+        return (
+            &lt;p&gt;{counter}&lt;/p&gt;
+        );
+    }
+
+    class Counter extends React.Component {
+        constructor(props, context) {
+            super(props, context);
+            this.state = {
+                counter: 0
+            };
+        }
+        increase() {
+            this.setState({
+                counter: this.state.counter + 1
+            });
+        }
+        render() {
+            return (
+                &lt;div&gt;
+                    &lt;CounterDisplay counter={this.state.counter} /&gt;
+                    &lt;CounterButton onIncrease={() => this.increase()} /&gt;
+                &lt;/div&gt;
+            );
+        }
+    }
+</code></pre></section></section><section><section><h2>Conditions</h2>
+<pre><code class="language-jsx">
+    // Imaginez que ça puisse changer de valeur :p
+    let show = true;
+    var world = "WOORRRLLLLDDDDD";
+
+    function HelloWorld1() {
+        return (
+            &lt;h1&gt;Hello { show && world} !&lt;/h1&gt;
+        );
+    }
+
+    function HelloWorld2() {
+        return (
+            &lt;h1&gt;Hello { show ? world : ""} !&lt;/h1&gt;
+        );
+    }
+
+    function HelloWorld3() {
+        const showWorld = () => {
+            if (show) return world;
+            return "";
+        }
+        return (
+            &lt;h1&gt;Hello {showWorld()} !&lt;/h1&gt;
+        );
+    }
+</code></pre></section><section><h2>Boucles</h2>
+<pre><code class="language-jsx">
+    const languages = ["Java", "Javascript", "ruby", "python", "scala"];
+
+    function Languages() {
+        return (
+            &lt;ul&gt;
+                {
+                    languages.map((language) => &lt;li&gt;{language}&lt;/li&gt;)
+                }
+            &lt;/ul&gt;
+        );
+    }
+</code></pre></section><section><h2>Spread attributes</h2>
+<pre><code class="language-jsx">
+    function CustomButton({text, ...attributes}) {
+        return (
+            &lt;button {...attributes}&gt;
+                {text}
+            &lt;/button&gt;
+        );
+    }
+</code></pre></section><section><h2>Nesting</h2>
+<pre><code class="language-jsx">
+    function CustomButton({children, ...attributes}) {
+        return (
+            &lt;button {...attributes}&gt;
+                {children}
+            &lt;/button&gt;
+        );
+    }
+
+    function SimpleComponent() {
+        return (
+            &lt;CustomButton&gt;
+                &lt;span&gt;Toto&lt;/span&gt;
+            &lt;/CustomButton&gt;
+        );
+    }
+</code></pre></section></section><section><section><h2>Et ensuite ?</h2>
+<ul>
+    <li>Style</li>
+    <li>Rendu coté serveur</li>
+    <li>Application "Native"</li>
+</ul></section></section>
+        </section>
+    </section>
+<script type="text/javascript" src="bundle.js"></script></body>
+</html>

@@ -1,0 +1,28 @@
+<h2>Conditions</h2>
+<pre><code class="language-jsx">
+    // Imaginez que ça puisse changer de valeur :p
+    let show = true;
+    var world = "WOORRRLLLLDDDDD";
+
+    function HelloWorld1() {
+        return (
+            &lt;h1&gt;Hello { show && world} !&lt;/h1&gt;
+        );
+    }
+
+    function HelloWorld2() {
+        return (
+            &lt;h1&gt;Hello { show ? world : ""} !&lt;/h1&gt;
+        );
+    }
+
+    function HelloWorld3() {
+        const showWorld = () => {
+            if (show) return world;
+            return "";
+        }
+        return (
+            &lt;h1&gt;Hello {showWorld()} !&lt;/h1&gt;
+        );
+    }
+</code></pre>

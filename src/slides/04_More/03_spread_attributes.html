@@ -1,0 +1,10 @@
+<h2>Spread attributes</h2>
+<pre><code class="language-jsx">
+    function CustomButton({text, ...attributes}) {
+        return (
+            &lt;button {...attributes}&gt;
+                {text}
+            &lt;/button&gt;
+        );
+    }
+</code></pre>

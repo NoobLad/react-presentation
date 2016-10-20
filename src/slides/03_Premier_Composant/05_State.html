@@ -1,0 +1,18 @@
+<h2>State</h2>
+<pre><code class="language-jsx">
+    class Counter extends React.Component {
+        constructor(props, context) {
+            super(props, context);
+            this.state = {
+                counter: 0
+            };
+        }
+        render() {
+            return (
+                &lt;div&gt;
+                    &lt;p&gt;{this.state.counter}&lt;/p&gt;
+                &lt;/div&gt;
+            );
+        }
+    }
+</code></pre>

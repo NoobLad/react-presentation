@@ -1,0 +1,18 @@
+<h2>Nesting</h2>
+<pre><code class="language-jsx">
+    function CustomButton({children, ...attributes}) {
+        return (
+            &lt;button {...attributes}&gt;
+                {children}
+            &lt;/button&gt;
+        );
+    }
+
+    function SimpleComponent() {
+        return (
+            &lt;CustomButton&gt;
+                &lt;span&gt;Toto&lt;/span&gt;
+            &lt;/CustomButton&gt;
+        );
+    }
+</code></pre>

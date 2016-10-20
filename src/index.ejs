@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webpack</title>
+</head>
+<body>
+    <%
+        var req = require.context("./", true, /^\.\/slides\/.*\.html/);
+        var keys = (PROD ? req.keys() : req.keys().filter(function(key) { return key.indexOf('toto') < 0; }));
+        var htmlTree = keys
+                .map(function (key) {
+                    var result = req(key);
+                    var tree = key.replace(/(\.\/)?slides\//g, '').split('/');
+                    return {
+                        branchId: tree.shift(),
+                        html: `<section>${result}</section>`
+                    };
+                }).reduce(function(acc, item) {
+                    acc[item.branchId] = acc[item.branchId] || [];
+                    acc[item.branchId].push(item.html);
+                    return acc;
+                }, {});
+    %>
+    <section class="reveal">
+        <section class="slides">
+            <%= Object.keys(htmlTree)
+                    .sort()
+                    .map(function(key) {
+                        return `<section>${htmlTree[key].join('')}</section>`
+                    })
+                    .join('') %>
+        </section>
+    </section>
+</body>
+</html>
